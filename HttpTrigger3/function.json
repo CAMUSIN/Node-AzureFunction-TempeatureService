@@ -1,0 +1,46 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get",
+        "post"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "bookmark",
+      "databaseName": "myDemoDatabase",
+      "collectionName": "Bookmarks",
+      "connectionStringSetting": "mezcalab_DOCUMENTDB",
+      "id": "{id}",
+      "partitionKey": "{id}"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "out",
+      "name": "newbookmark",
+      "databaseName": "myDemoDatabase",
+      "collectionName": "Bookmarks",
+      "createIfNotExists": false,
+      "connectionStringSetting": "mezcalab_DOCUMENTDB",
+      "partitionKey": "/id"
+    },
+    {
+      "type": "queue",
+      "direction": "out",
+      "name": "newmessage",
+      "queueName": "bookmarks-post-process",
+      "connection": "AzureWebJobsStorage"
+    }
+  ]
+}
